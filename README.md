@@ -25,6 +25,7 @@ Everything happens on your screen only – other players don't see what you do o
 |---|---|
 | Take out / put away the tablet | **Ctrl + M** |
 | Take out the tablet straight into the terminal, ready to type | **Ctrl + Alt + T** |
+| Toggle input in the terminal | **ENTER** |
 | Tablet actions (map, camera, list…) | **F** on the tablet |
 | Screen brightness | **scroll** on the tablet button |
 | Volume of KNS sounds / radio | **F + scroll** on the tablet button (Volume / Radio volume action) |
