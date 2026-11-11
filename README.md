@@ -62,14 +62,48 @@ The game map on your tablet.
 
 ### LIST, STATS, STATUS
 - **LIST** – players by faction: kills, deaths, teamkills, score.
-- **STATS** – your stats for this session and in total (time, distance, kills, deaths, caught bugs, best game scores…). **Num 8 / Num 2** to scroll.
+- **STATS** – your stats for this session and in total (time, distance, kills, deaths, taxi distance, caught bugs, best game scores…).
 - **STATUS** – time, wind, weather and a log of events.
+
+TIP:  use **Num 8 / Num 2** to scroll.
 
 ### AIRCRACK
 Scans for drones nearby and connects to their cameras. **Ctrl + I / Ctrl + Y** switch between drones.
 
 ### kukaOS screen
 The **kukaUX** button switches between the terminal and the kukaOS screen. From kukaOS you get quick actions: **Manual, BugGO, CPTR (game), Camera, Selfie**. It also shows time, your FPS, server FPS and ping.
+
+---
+
+## Taxi
+
+Need a ride, or want to drive for your team? The tablet has a taxi service – for **your own faction** only.
+
+### Calling a taxi
+- `taxi` – call a taxi to where you stand. Drivers on duty get your call with a sound and see you on their map.
+- `taxi cancel` – cancel your call (or the ride).
+- While a taxi is coming, you see it on your tablet map.
+- After a call or a cancel you have to wait a moment before calling again.
+
+### Working as a driver
+- `taxi start` – go on duty (confirm with `taxi start yes`), `taxi stop` – off duty.
+- `taxi list` – opens the **TAXI** app:
+  - **Num 8 / Num 2** – select a call, **Enter** – take it
+  - **Num 5** – show the call on the map (**ESC** back to TAXI)
+- `taxi take <id>` – take a call by the player ID.
+- During a ride the TAXI app shows **map**, **taxi done** and **taxi cancel** – select with **Num 8 / Num 2**, confirm with **Enter**.
+
+### The ride
+- It starts when you get within **3 m** of the client, or when they get into your vehicle.
+- `taxi done` – finish the ride at the destination.
+- It also ends by itself when you and the passenger are **100 m apart for 30 s** (they got out and walked away).
+- Finished rides add the distance you drove to **TAXI** in **STATS**.
+
+### Good to know
+- Max **5 drivers on duty** per faction.
+- Drivers go **off duty when they die**. If a driver dies or leaves before picking you up, your call goes back to the other drivers.
+- `taxi start` cancels your own waiting call.
+- `taxi help` – a short summary in the terminal.
 
 ---
 
@@ -89,6 +123,7 @@ The heart of the tablet.
 - `map`, `kns`, `list`, `stats`, `status`, `aircrack` – open the screens above
 - `kns <id>`, `map <id>` – a specific teammate; `players` / `ids` – player IDs
 - `health`, `h <id>` – your body or a teammate's: health in %, blood, consciousness, bleeding
+- `taxi` – call a taxi (or work as a driver - see **Taxi** section)
 - `where <id>` – distance and direction to a teammate
 - `gps` / `me` – your grid position, `az <x> <y>` – distance and direction to a grid (e.g. `az 0482 1135`)
 - `compass` / `c` – the direction you are facing
