@@ -75,6 +75,48 @@ The **kukaUX** button switches between the terminal and the kukaOS screen. From 
 
 ---
 
+## Phone & channels
+
+Talk to other players through your tablet – voice, any distance, without a radio.
+
+### Who can call you
+Before your first call, choose who can reach you (saved):
+- `phone off` – nobody, your phone is off
+- `phone faction` – your own faction only
+- `phone all` – everyone, enemies too
+
+`phone` shows your current setting.
+
+### Calling
+- `call <id>` – call a player (IDs: `players` / `ids`). Your screen shows **Calling NAME..** – **ESC** cancels.
+- The other player hears a ring and sees **NAME calling..**:
+  - **Enter** – answer, **ESC** – decline
+  - or type `answer` / `decline`
+- If the tablet is put away, it rings anyway – take it out (**Ctrl + M**) and the call screen is there.
+- No answer in 30 s and the call ends.
+
+### During a call
+- Your **microphone is on all the time** – just talk, like on a phone.
+- The tablet works as usual (map, KNS, terminal…), the call keeps going.
+- Your normal radio / voice keys still work – after you release them, you're back on the call.
+- `hangup` – end the call. It also ends when one of you dies, leaves the server or loses the tablet.
+- If someone can't be reached, you only see *not available* – you never know why.
+
+### Shared channels
+A voice channel for a whole group – everyone on the same number hears each other.
+- `channel <1-9999>` – join a channel
+- `channel talk` – microphone on / off (any voice key turns it off)
+- `channel off` – leave
+- `channel` – which channel you're on
+
+Channels and phone calls never mix – nobody on a channel can listen to a call. While you're on a channel, others can't call you; `call` takes you off the channel first.
+
+### Good to know
+- Calling the same player again after a decline or no answer needs a short wait.
+- `call help`, `channel help` – a short summary in the terminal.
+
+---
+
 ## Taxi
 
 Need a ride, or want to drive for your team? The tablet has a taxi service – for **your own faction** only.
@@ -122,6 +164,7 @@ The heart of the tablet.
 **Navigation and info**
 - `map`, `kns`, `list`, `stats`, `status`, `aircrack` – open the screens above
 - `kns <id>`, `map <id>` – a specific teammate; `players` / `ids` – player IDs
+- `call <id>`, `phone`, `channel <n>` – voice calls and shared channels (see **Phone & channels** section)
 - `health`, `h <id>` – your body or a teammate's: health in %, blood, consciousness, bleeding
 - `taxi` – call a taxi (or work as a driver - see **Taxi** section)
 - `where <id>` – distance and direction to a teammate
