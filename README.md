@@ -10,6 +10,8 @@ With the tablet you can:
 - open a **map** right on the tablet, follow yourself or a teammate,
 - **scan for drones** and look through their cameras (AIRCRACK),
 - check **players, stats, weather, events, vehicles and health**,
+- **call other players** by voice and join shared voice channels,
+- **call a taxi** or work as a driver for your team,
 - place your own **CCTV camera** and watch it from up to 300 m,
 - **take photos** with the tablet camera,
 - play small games (yes it kinda runs it), hunt bugs with **BugGO**, listen to sounds, take notes,
@@ -35,7 +37,7 @@ All keys can be changed in **Settings → Controls → KUKA**.
 
 The first time you switch the tablet on in a life, it boots up – give it a second.
 
-**The tablet remembers where you were.** If you put it away (e.g. to sprint) and take it out again, the map, AIRCRACK, the KNS camera, LIST, STATS, STATUS and BugGO come back exactly as you left them. Other programs return to the terminal.
+**The tablet remembers where you were.** If you put it away (e.g. to sprint) and take it out again, the map, AIRCRACK, the KNS camera, LIST, STATS, STATUS, SCANNER, TAXI, PHONE and BugGO come back exactly as you left them. Other programs return to the terminal.
 
 ---
 
@@ -61,9 +63,9 @@ The game map on your tablet.
   - `map marker color black` / `blue` / `red` / `other` – arrow color
 
 ### LIST, STATS, STATUS
-- **LIST** – players by faction: kills, deaths, teamkills, score.
+- **LIST** – players by faction: kills, deaths, score.
 - **STATS** – your stats for this session and in total (time, distance, kills, deaths, taxi distance, caught bugs, best game scores…).
-- **STATUS** – time, wind, weather and a log of events.
+- **STATUS** – time, wind, weather, your deployment time (with the whole scenario time in brackets) and a log of events.
 
 TIP:  use **Num 8 / Num 2** to scroll.
 
@@ -71,7 +73,18 @@ TIP:  use **Num 8 / Num 2** to scroll.
 Scans for drones nearby and connects to their cameras. **Ctrl + I / Ctrl + Y** switch between drones.
 
 ### kukaOS screen
-The **kukaUX** button switches between the terminal and the kukaOS screen. From kukaOS you get quick actions: **Manual, BugGO, CPTR (game), Camera, Selfie**. It also shows time, your FPS, server FPS and ping.
+The **kukaUX** button (or `kukaux` in the terminal) switches between the terminal and the kukaOS screen. It shows your FPS, server FPS and ping, the time, day and date.
+
+At the bottom there is a bar of quick actions (**F** on the icon):
+- **Phone** – the PHONE app (who you can call); during a call it becomes **Hang up**
+- **Camera**, **Selfie** – tablet cameras
+- **Taxi** – calls a taxi; if you are a driver on duty, it opens your taxi calls
+- **BugGO**, **CPTR** (copter game)
+- **Manual**
+
+### Themes and wallpapers
+- `theme` – terminal colors, `wallpaper` – backgrounds of the kukaOS screen. Both list what you have; `theme green` / `wallpaper mucha` switches (saved).
+- Some are **locked**. Catch a very rare **StackOverflow** with BugGO and type `stackoverflow` – it unlocks a random theme or wallpaper you don't have yet.
 
 ---
 
@@ -88,7 +101,8 @@ Before your first call, choose who can reach you (saved):
 `phone` shows your current setting.
 
 ### Calling
-- `call <id>` – call a player (IDs: `players` / `ids`). Your screen shows **Calling NAME..** – **ESC** cancels.
+- `phone list` (or the **Phone** icon on the kukaOS screen) – the **PHONE** app with everyone you can call right now: **Num 8 / Num 2** – select, **Enter** – call.
+- `call <id>` – call a player directly (IDs: `players` / `ids`). Your screen shows **Calling NAME..** – **ESC** cancels.
 - The other player hears a ring and sees **NAME calling..**:
   - **Enter** – answer, **ESC** – decline
   - or type `answer` / `decline`
@@ -99,7 +113,7 @@ Before your first call, choose who can reach you (saved):
 - Your **microphone is on all the time** – just talk, like on a phone.
 - The tablet works as usual (map, KNS, terminal…), the call keeps going.
 - Your normal radio / voice keys still work – after you release them, you're back on the call.
-- `hangup` – end the call. It also ends when one of you dies, leaves the server or loses the tablet.
+- `hangup` (or **Hang up** on the kukaOS screen) – end the call. It also ends when one of you dies, leaves the server or loses the tablet.
 - If someone can't be reached, you only see *not available* – you never know why.
 
 ### Shared channels
@@ -122,14 +136,14 @@ Channels and phone calls never mix – nobody on a channel can listen to a call.
 Need a ride, or want to drive for your team? The tablet has a taxi service – for **your own faction** only.
 
 ### Calling a taxi
-- `taxi` – call a taxi to where you stand. Drivers on duty get your call with a sound and see you on their map.
+- `taxi` (or the **Taxi** icon on the kukaOS screen) – call a taxi to where you stand. Drivers on duty get your call with a sound and see you on their map.
 - `taxi cancel` – cancel your call (or the ride).
 - While a taxi is coming, you see it on your tablet map.
 - After a call or a cancel you have to wait a moment before calling again.
 
 ### Working as a driver
 - `taxi start` – go on duty (confirm with `taxi start yes`), `taxi stop` – off duty.
-- `taxi list` – opens the **TAXI** app:
+- `taxi list` (or the **Taxi** icon on the kukaOS screen while on duty) – opens the **TAXI** app:
   - **Num 8 / Num 2** – select a call, **Enter** – take it
   - **Num 5** – show the call on the map (**ESC** back to TAXI)
 - `taxi take <id>` – take a call by the player ID.
@@ -164,16 +178,16 @@ The heart of the tablet.
 **Navigation and info**
 - `map`, `kns`, `list`, `stats`, `status`, `aircrack` – open the screens above
 - `kns <id>`, `map <id>` – a specific teammate; `players` / `ids` – player IDs
-- `call <id>`, `phone`, `channel <n>` – voice calls and shared channels (see **Phone & channels** section)
+- `call <id>`, `phone`, `phone list`, `channel <n>` – voice calls and shared channels (see **Phone & channels** section)
 - `health`, `h <id>` – your body or a teammate's: health in %, blood, consciousness, bleeding
 - `taxi` – call a taxi (or work as a driver - see **Taxi** section)
 - `where <id>` – distance and direction to a teammate
-- `gps` / `me` – your grid position, `az <x> <y>` – distance and direction to a grid (e.g. `az 0482 1135`)
+- `gps` / `me` – your grid position, `az <x> <y>` / `azimuth <x> <y>` – distance and direction to a grid (e.g. `az 0482 1135`)
 - `compass` / `c` – the direction you are facing
 - `obd` – your vehicle: engine, rpm, gear, speed, fuel, damage
 - `scanner` / `scan` – deployed radios nearby (rough distance and direction)
 - `material` / `mat` – what the surface you look at is made of (ballistics, up to 5 m)
-- `origin` / `ori` – which mod the object you look at comes from (up to 5 m)
+- `origin` / `ori` – which mod the object you look at comes from, all mods that changed it and its base prefabs (up to 5 m)
 
 **Server and connection**
 - `net` – server name, server FPS, your FPS, ping, packet loss
@@ -183,7 +197,7 @@ The heart of the tablet.
 - `camera` – back camera; **hold Num 5** to take a photo
 - `selfie` – front camera (mirrored)
 - `camera list` – your saved photos (folder `profile/KNS/screenshots`)
-- `cctv set [height] [direction]` – place your CCTV camera here, `cctv` – connect (up to 300 m), `cctv off` – remove. One camera, gone when you die.
+- `cctv set [height] [direction]` – place your CCTV camera here (height 10-100 cm), `cctv` – connect (up to 300 m), `cctv off` – remove. One camera, gone when you die.
 
 **Fun**
 - `buggo` – a bug hides nearby; find it with **BugGO** (kukaOS) or `buggo cam` and catch it with **Enter**. Caught bugs count in STATS – some are very rare…
@@ -199,9 +213,9 @@ The heart of the tablet.
 - `log` – notifications, players joining / leaving, killfeed and kukaUX messages with real time
 - `print <text>` – write your name, position, time and text to the STATUS log; `save` – export STATUS and terminal logs to a file
 - `kpad` – new note, `kpad list` – saved notes, `kpad <n>` – open one (inside a note: Enter new line, `:q` or ESC exit)
-- `theme` – terminal colors (some are locked)
+- `theme` – terminal colors, `wallpaper` – kukaOS backgrounds, `stackoverflow` – unlock a new one (see **Themes and wallpapers**)
 - `clear` – clear the terminal history, `run <program>` – same as typing the program
-- `qr` / `kukaux` – the kukaOS screen
+- `kukaux` – the kukaOS screen
 - `exit` / `off` – switch the tablet off
 
 ---
@@ -217,6 +231,7 @@ You don't have to type full commands – these short ones do the same:
 | `s` | stats |
 | `st` | status |
 | `ac` | aircrack |
+| `az` | azimuth |
 | `h` | health |
 | `id` | your own ID |
 | `ids` | player IDs |
@@ -234,7 +249,7 @@ Reminder: Use the arrow keys to cycle through recent commands.
 - The tablet works only **in your hands** – put it away and it switches off (and remembers where you were).
 - KNS cameras, map following and health of other players work only for **your own faction**.
 - Some features are **PC only** (photos, files, videos, HELL, Wikipedia) – on consoles you'll see *"This is PC-exclusive feature."*
-- Settings (brightness, volume, map options, theme…) are saved on your PC in `profile/KNS/`.
+- Settings (brightness, volume, map options, phone, theme, wallpaper…) and what you unlocked are saved on your PC in `profile/KNS/` – they stay after leaving the server or restarting the game.
 - Not sure about a command? Type it with `help`, e.g. `cctv help`. Or open the **Manual** on the kukaOS screen.
 
 Have fun! – *kukaUX, made by kuka*
