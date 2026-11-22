@@ -1,0 +1,378 @@
+###########################################
+#
+#  MINEFIELD - a CHIP-8 game for the KNS tablet (kukaUX)
+#
+#  Lead the soldier from the bottom row to the finish line at the top.
+#  Mines are hidden. The detector (3 scans per level) shows the mines
+#  around you for a moment - remember them and walk carefully.
+#  3 lives. Every level has more mines.
+#
+#  Keys (CHIP-8):  5 up, 8 down, 7 left, 9 right, 6 detector
+#  KNS tablet:     Num 8 / Num 2 / Num 4 / Num 6, Num 5 detector
+#  PC emulators:   W / S / A / D, E detector
+#
+#  Field: 16 x 8 cells, 4 x 4 pixels each. Row 0 = finish, row 7 = start.
+#
+###########################################
+
+:alias px v4        # player column 0-15
+:alias py v5        # player row 0-7
+:alias level v6
+:alias lives v7
+:alias scans v8
+:alias index v9
+:alias nx va        # new position
+:alias ny vb
+:alias limit vc     # mine chance (0-255)
+:alias startx vd    # start column of this level
+
+:const KEY-UP 5
+:const KEY-DOWN 8
+:const KEY-LEFT 7
+:const KEY-RIGHT 9
+:const KEY-SCAN 6
+:const MOVE-DELAY 7
+:const SCAN-TIME 50
+:const SCANS 3
+:const LIVES 3
+
+###########################################
+#  Main
+###########################################
+
+: main
+	level := 1
+	lives := LIVES
+
+: new-level
+	show-level-screen    # level screen first, the field is generated meanwhile
+	generate
+	v0 := 40
+	wait
+
+: restart-level
+	scans := SCANS
+	px := startx
+	py := 7
+	draw-board
+
+	loop
+		# Moves repeat while the key is held (every MOVE-DELAY frames)
+		v0 := delay
+		if v0 == 0 then play-input
+	again
+
+###########################################
+#  Input: move or scan
+###########################################
+
+: play-input
+	nx := px
+	ny := py
+	v0 := KEY-SCAN   if v0 key then jump scan     # scan returns from play-input
+	v0 := KEY-UP     if v0 key then ny += 255
+	v0 := KEY-DOWN   if v0 key then ny += 1
+	v0 := KEY-LEFT   if v0 key then nx += 255
+	v0 := KEY-RIGHT  if v0 key then nx += 1
+
+	# Edges of the field
+	if ny == 255 then ny := 0
+	if ny == 8 then ny := 7
+	if nx == 255 then nx := 0
+	if nx == 16 then nx := 15
+
+	if nx != px then jump move
+	if ny != py then jump move
+	return
+
+: move
+	draw-player        # erase (XOR)
+	px := nx
+	py := ny
+	draw-player
+	v0 := MOVE-DELAY
+	delay := v0
+
+	if py == 0 then jump win
+
+	cell-index
+	i := field
+	i += index
+	load v0
+	if v0 == 1 then jump boom
+	return
+
+###########################################
+#  Detector: mines in 5 x 5 around the player, for a moment
+###########################################
+
+: scan
+	if scans == 0 then return
+	scans += 255
+	v0 := 3
+	buzzer := v0
+	toggle-mines
+	v0 := SCAN-TIME
+	wait
+	toggle-mines
+	return
+
+: toggle-mines
+	v2 := 0              # dy 0-4 (= -2..2)
+	loop
+		ny := py
+		ny += v2
+		ny += 254            # -2
+		# Only rows 1-6 (wrap below 0 gives > 6)
+		if ny == 0 then jump toggle-row-next
+		if ny > 6 then jump toggle-row-next
+		ve := ny             # row start in the field = ny * 16
+		ve <<= ve
+		ve <<= ve
+		ve <<= ve
+		ve <<= ve
+		v1 := ny             # pixel y = ny * 4
+		v1 <<= v1
+		v1 <<= v1
+		v3 := 0              # dx 0-4
+		loop
+			nx := px
+			nx += v3
+			nx += 254
+			if nx > 15 then jump toggle-next    # also wrap below 0
+			i := field
+			i += ve
+			i += nx
+			load v0
+			if v0 != 1 then jump toggle-next
+			v0 := nx
+			v0 <<= v0
+			v0 <<= v0
+			i := sprite-mine
+			sprite v0 v1 4
+: toggle-next
+			v3 += 1
+			if v3 != 5 then
+		again
+: toggle-row-next
+		v2 += 1
+		if v2 != 5 then
+	again
+	return
+
+###########################################
+#  Win, mine, game over
+###########################################
+
+: win
+	v0 := 10
+	buzzer := v0
+	v0 := 30
+	wait
+	level += 1
+	jump new-level
+
+: boom
+	# Explosion over the player (8 x 8, centered)
+	v0 := px
+	v0 <<= v0
+	v0 <<= v0
+	if v0 != 0 then v0 += 254
+	v1 := py
+	v1 <<= v1
+	v1 <<= v1
+	v1 += 254
+	i := sprite-boom
+	sprite v0 v1 8
+	v2 := 30
+	buzzer := v2
+	v2 := 60
+	delay := v2
+	loop
+		v2 := delay
+		if v2 != 0 then
+	again
+	lives += 255
+	if lives == 0 then jump game-over
+	show-level-screen
+	v0 := 90
+	wait
+	jump restart-level
+
+: game-over
+	clear
+	# Skull and the level you reached
+	i := sprite-skull
+	v0 := 28
+	v1 := 6
+	sprite v0 v1 8
+	v0 := 24
+	v1 := 18
+	draw-number
+	v0 := key
+	jump main
+
+###########################################
+#  New level: field with a safe path and random mines
+###########################################
+
+: generate
+	# Mine chance grows with the level: 40 + 16 per level (max ~150)
+	limit := 24
+	v0 := level
+	loop
+		limit += 16
+		v0 += 255
+		if limit > 133 then v0 := 0
+		if v0 != 0 then
+	again
+
+	# Rows 1-6: mine or empty (rows 0 and 7 are never read as mines)
+	index := 16
+	loop
+		v1 := random 255
+		v0 := 0
+		if v1 < limit then v0 := 1
+		i := field               # i set every time (works with any load/store quirk)
+		i += index
+		save v0
+		index += 1
+		if index != 112 then
+	again
+
+	# Safe path from the start row to the finish (value 2 = never a mine)
+	v0 := random 15
+	startx := v0
+	nx := v0
+	ny := 6
+	loop
+		mark-safe
+		v1 := random 3
+		if v1 == 3 then v1 := 1
+		if nx == 0 begin
+			if v1 == 0 then v1 := 1
+		end
+		if nx == 15 begin
+			if v1 == 2 then v1 := 1
+		end
+		nx += v1
+		nx += 255
+		mark-safe
+		ny += 255
+		if ny != 0 then
+	again
+	return
+
+: mark-safe
+	index := ny
+	index <<= index
+	index <<= index
+	index <<= index
+	index <<= index
+	index += nx
+	i := field
+	i += index
+	v0 := 2
+	save v0
+	return
+
+###########################################
+#  Screens
+###########################################
+
+: draw-board
+	clear
+	# Finish line (row 0)
+	i := sprite-goal
+	v0 := 0
+	v1 := 0
+	loop
+		sprite v0 v1 4
+		v0 += 4
+		if v0 != 64 then
+	again
+	draw-player
+	return
+
+: show-level-screen
+	clear
+	# Level number
+	v0 := 24
+	v1 := 8
+	draw-number
+	# Lives
+	i := sprite-player
+	v0 := 22
+	v2 := 0
+	loop
+		v1 := 20
+		sprite v0 v1 4
+		v0 += 8
+		v2 += 1
+		if v2 != lives then
+	again
+	return
+
+# Number from level at (v0, v1), up to 3 digits
+: draw-number
+	v3 := v0
+	ve := v1
+	i := digits
+	bcd level
+	load v2           # v0 hundreds, v1 tens, v2 ones
+	if v0 != 0 begin
+		i := hex v0
+		sprite v3 ve 5
+	end
+	v3 += 6
+	if v0 != 0 then jump draw-tens
+	if v1 == 0 then jump draw-ones
+: draw-tens
+	i := hex v1
+	sprite v3 ve 5
+: draw-ones
+	v3 += 6
+	i := hex v2
+	sprite v3 ve 5
+	return
+
+: draw-player
+	v0 := px
+	v0 <<= v0
+	v0 <<= v0
+	v1 := py
+	v1 <<= v1
+	v1 <<= v1
+	i := sprite-player
+	sprite v0 v1 4
+	return
+
+: cell-index
+	index := py
+	index <<= index
+	index <<= index
+	index <<= index
+	index <<= index
+	index += px
+	return
+
+# Wait v0 frames
+: wait
+	delay := v0
+	loop
+		v0 := delay
+		if v0 != 0 then
+	again
+	return
+
+###########################################
+#  Data
+###########################################
+
+: sprite-player 0x60 0xF0 0x60 0x90
+: sprite-mine   0x00 0x60 0x60 0x00
+: sprite-goal   0xA0 0x50 0xA0 0x50
+: sprite-boom   0x91 0x5A 0x3C 0xFF 0x3C 0x5A 0x91 0x10
+: sprite-skull  0x3C 0x7E 0xDB 0xDB 0xFF 0x66 0x3C 0x24
+: digits        0 0 0
+: field
