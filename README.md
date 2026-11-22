@@ -14,7 +14,7 @@ With the tablet you can:
 - **call a taxi** or work as a driver for your team,
 - place your own **CCTV camera** and watch it from up to 300 m,
 - **take photos** with the tablet camera,
-- play small games (yes it kinda runs it), hunt bugs with **BugGO**, listen to sounds, take notes,
+- play games (yes it kinda runs it) – **BATTLE** against other players, **BLOX**, **HANGMAN**, **MOTO**, **FPV**, **DREAM**, even a **CHIP-8 emulator** – hunt bugs with **BugGO**, listen to sounds, take notes,
 - and type commands in a **terminal**, just like on a real computer.
 
 Everything happens on your screen only – other players don't see what you do on your tablet.
@@ -37,7 +37,7 @@ All keys can be changed in **Settings → Controls → KUKA**.
 
 The first time you switch the tablet on in a life, it boots up – give it a second.
 
-**The tablet remembers where you were.** If you put it away (e.g. to sprint) and take it out again, the map, AIRCRACK, the KNS camera, LIST, STATS, STATUS, SCANNER, TAXI, PHONE and BugGO come back exactly as you left them. Other programs return to the terminal.
+**The tablet remembers where you were.** If you put it away (e.g. to sprint) and take it out again, the map, AIRCRACK, the KNS camera, LIST, STATS, STATUS, SCANNER, TAXI, PHONE and BugGO come back exactly as you left them. Other programs return to the terminal. A BATTLE game keeps going in the background – type `battle` to get back to it.
 
 ---
 
@@ -64,13 +64,16 @@ The game map on your tablet.
 
 ### LIST, STATS, STATUS
 - **LIST** – players by faction: kills, deaths, score.
-- **STATS** – your stats for this session and in total (time, distance, kills, deaths, taxi distance, caught bugs, best game scores…).
+- **STATS** – your stats for this session and in total: time, distance, kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV).
 - **STATUS** – time, wind, weather, your deployment time (with the whole scenario time in brackets) and a log of events.
 
 TIP:  use **Num 8 / Num 2** to scroll.
 
 ### AIRCRACK
 Scans for drones nearby and connects to their cameras. **Ctrl + I / Ctrl + Y** switch between drones.
+
+### LIDAR
+`lidar` – the world in front of you drawn from laser rays, in ASCII, up to 200 m. **ESC** back. PC only.
 
 ### kukaOS screen
 The **kukaUX** button (or `kukaux` in the terminal) switches between the terminal and the kukaOS screen. It shows your FPS, server FPS and ping, the time, day and date.
@@ -163,6 +166,59 @@ Need a ride, or want to drive for your team? The tablet has a taxi service – f
 
 ---
 
+## Games
+
+`games` (or `help games`) lists them all. `<name> help` gives a short summary in the terminal. **ESC** always takes you back.
+
+### BATTLE – battleships against other players
+Classic battleships, played over the server against another player – or against the tablet.
+- `battle <id>` – invite a player (IDs: `players` / `ids`), `battle quit` – cancel the invite
+- The invited player sees the invite in the terminal: `battle accept` or `battle decline`
+- `battle cpu` – play against the tablet
+- **Num 5** – new random fleet, **Enter** – ready, then **Num 8/2/4/6** aim and **Enter** fire
+- **ESC** hides the game – it keeps going in the background, even if you die. `battle` brings it back; the terminal tells you when it's your turn.
+- `battle quit` – end the game (leaving the server ends it too)
+- Who can invite you (saved): `battle off` – nobody, `battle faction` – your faction only (default), `battle all` – everyone, enemies too. `battle settings` shows it.
+- Wins against other players count as **BATTLE WINS** in STATS.
+
+### BLOX – falling blocks
+`blox` – **Num 4/6** move, **Num 8** rotate, **Num 2** faster, **Num 5** drop. Full rows disappear, the game gets faster. Best score in STATS.
+
+### HANGMAN
+`hangman` – guess the word letter by letter. **Num 4/6** choose a letter, **Num 8/2** other row, **Enter** or **Num 5** guess. 7 mistakes and you hang.
+
+### MOTO – motorcycle trial (PC only)
+`moto` – ride a track high above a valley, first-person, to the finish gate. **Num 8** gas, **Num 2** brake / reverse, **Num 4/6** steer. Drops, kickers and gap jumps – take them with enough speed. Fall off the track and you lose a life (3 per run). Every finish gate is a new level. Best level in STATS.
+- `moto sandbox` – free ride on flat ground full of jumps, no lives, no record.
+
+### FPV – drone racing (PC only)
+`fpv` – fly an FPV drone through the rings. The **yellow** ring is the one you need, the **orange-red** ones come next. Miss a ring and you have to turn back – the next ones don't count until you fly through it.
+- **Num 8** nose down (faster), **Num 2** nose up, **Num 4/6** turn, **Num + / Num -** up / down, **Enter** short boost
+- The battery drains all the time – every ring adds a few seconds.
+- Hit the ground or a rock and the drone explodes (the crater stays) – *NO SIGNAL*. Empty battery – *BATTERY EMPTY*.
+- Most rings in one flight – **BEST FPV** in STATS.
+
+### DREAM (PC only)
+`dream` – walk through dreams: islands in the void, empty cities, hills, forests of pillars. **Num 8/2** walk, **Num 4/6** turn. Find the glowing crystals – collect enough and you wake up in a new dream. Walk into the void and you fall… And sometimes you are not alone in the dream – keep your distance.
+
+### CPTR, HELL, BugGO
+- `cptr` – fly a copter through a tunnel (**Num 8 / Num 2**), best flight in STATS
+- `hell` – ASCII HELL shooter (PC only), best time in STATS
+- `buggo` – a bug hides nearby; find it with **BugGO** (kukaOS) or `buggo cam` and catch it with **Enter**. Caught bugs count in STATS – some are very rare…
+
+### CHIP-8 emulator (PC only)
+The tablet runs real **CHIP-8** games – a tiny game computer from the late 70s, still loved by homebrew makers today.
+- Put `.ch8` files into `profile/KNS/chip8/` on your PC
+- `chip8 list` – your files, `chip8 <name>` – run one (e.g. `chip8 minefield`)
+- Keys: **Num 8/2/4/6**, **Num 5**, **Enter**, **Num + / Num -** (CHIP-8 keys 5/8/7/9, 6, 4, A, 0)
+- **MINEFIELD** – own free example game, with its source code, available on here on GitHub.
+- Use only **free / homebrew games** or ones you have the rights to.
+
+### Quick ones
+`dice`, `dice 20`, `coin`
+
+---
+
 ## Terminal
 
 The heart of the tablet.
@@ -170,13 +226,14 @@ The heart of the tablet.
 - **Enter** – start typing, **Enter** – run the command, **ESC** – stop typing
 - **ESC** in the terminal (when not typing) – switches the tablet off
 - **Arrow keys** – last commands, **Tab** – complete a command
-- `help` – list of commands, `<command> help` – what it does (e.g. `map help`)
+- `help` – commands by topic: `help programs`, `help games`, `help players`, `help tools`, `help system`; `help all` – every command
+- `<command> help` – what it does (e.g. `map help`)
 - **Num 8 / Num 2** – scroll the history
 
 ### Useful commands
 
 **Navigation and info**
-- `map`, `kns`, `list`, `stats`, `status`, `aircrack` – open the screens above
+- `map`, `kns`, `list`, `stats`, `status`, `aircrack`, `lidar` – open the screens above
 - `kns <id>`, `map <id>` – a specific teammate; `players` / `ids` – player IDs
 - `call <id>`, `phone`, `phone list`, `channel <n>` – voice calls and shared channels (see **Phone & channels** section)
 - `health`, `h <id>` – your body or a teammate's: health in %, blood, consciousness, bleeding
@@ -200,12 +257,10 @@ The heart of the tablet.
 - `cctv set [height] [direction]` – place your CCTV camera here (height 10-100 cm), `cctv` – connect (up to 300 m), `cctv off` – remove. One camera, gone when you die.
 
 **Fun**
-- `buggo` – a bug hides nearby; find it with **BugGO** (kukaOS) or `buggo cam` and catch it with **Enter**. Caught bugs count in STATS – some are very rare…
-- `cptr` – fly a copter through a tunnel (**Num 8 / Num 2**), best flight in STATS
-- `hell` – ASCII HELL shooter (PC only), best time in STATS
+- Games – see the **Games** section (`games` lists them)
 - `player list`, `player <name>`, `player next / prev / stop` – sounds that keep playing in the background; `volume 0-100`
 - `video list`, `video <name>` – short videos (PC only)
-- `dice`, `dice 20`, `coin`, `armahints`
+- `armahints`
 - `wiki <word>` – the start of a Wikipedia article (PC only, asks for permission the first time)
 - `radio` – radio stations: `radio <n>`, `radio next`, `radio list`, `radio off`, `radio vol 0-100` (needs the Project Sonar mod on the server)
 
@@ -248,8 +303,8 @@ Reminder: Use the arrow keys to cycle through recent commands.
 
 - The tablet works only **in your hands** – put it away and it switches off (and remembers where you were).
 - KNS cameras, map following and health of other players work only for **your own faction**.
-- Some features are **PC only** (photos, files, videos, HELL, Wikipedia) – on consoles you'll see *"This is PC-exclusive feature."*
-- Settings (brightness, volume, map options, phone, theme, wallpaper…) and what you unlocked are saved on your PC in `profile/KNS/` – they stay after leaving the server or restarting the game.
+- Some features are **PC only** (photos, files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, CHIP-8) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN and CPTR work everywhere – PC and console players can play BATTLE together.
+- Settings (brightness, volume, map options, phone, battle, theme, wallpaper…) and what you unlocked are saved on your PC in `profile/KNS/` – they stay after leaving the server or restarting the game.
 - Not sure about a command? Type it with `help`, e.g. `cctv help`. Or open the **Manual** on the kukaOS screen.
 
 Have fun! – *kukaUX, made by kuka*
