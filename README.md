@@ -14,7 +14,7 @@ With the tablet you can:
 - **call a taxi** or work as a driver for your team,
 - place your own **CCTV camera** and watch it from up to 300 m,
 - **take photos** with the tablet camera,
-- play games (yes it kinda runs it) – **BATTLE** against other players, **BLOX**, **HANGMAN**, **MOTO**, **FPV**, **DREAM**, even a **CHIP-8 emulator** – hunt bugs with **BugGO**, listen to sounds, take notes,
+- play games (yes it kinda runs it) – **BATTLE** against other players, **BLOX**, **HANGMAN**, **MOTO**, **FPV**, **SKI**, **DREAM**, build with blocks in **VOXEL**, talk to **ELIZA**, even a **CHIP-8 emulator** and a **Z-machine** for text adventures – hunt bugs with **BugGO**, listen to sounds, take notes,
 - and type commands in a **terminal**, just like on a real computer.
 
 Everything happens on your screen only – other players don't see what you do on your tablet.
@@ -64,7 +64,7 @@ The game map on your tablet.
 
 ### LIST, STATS, STATUS
 - **LIST** – players by faction: kills, deaths, score.
-- **STATS** – your stats for this session and in total: time, distance, kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV).
+- **STATS** – your stats for this session and in total: time, distance, kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV, SKI).
 - **STATUS** – time, wind, weather, your deployment time (with the whole scenario time in brackets) and a log of events.
 
 TIP:  use **Num 8 / Num 2** to scroll.
@@ -197,9 +197,30 @@ Classic battleships, played over the server against another player – or agains
 - The battery drains all the time – every ring adds a few seconds.
 - Hit the ground or a rock and the drone explodes (the crater stays) – *NO SIGNAL*. Empty battery – *BATTERY EMPTY*.
 - Most rings in one flight – **BEST FPV** in STATS.
+- `fpv voxel` – race over the world you built in **VOXEL** (each block becomes a 4 m building block). No record here, and craters disappear when you leave – your world stays as it was.
+- `fpv voxel free` – free flight over your VOXEL world: no rings, no battery. Crash, wreck your buildings and go again – the destruction stays until you leave.
+
+### SKI – slalom (PC only)
+`ski` – a slalom on time down a long slope, first-person, with your skis in front of you. Every run is a new slope.
+- **Num 4/6** turn (a sharp turn brakes), **Num 8** tuck (faster, weaker turns) – when slow it pushes with the poles, **Num 2** plough (brake), **Num 5** jump
+- Pass between the poles of each gate (red and blue in turns) – a missed gate is **+5 s**.
+- Trees knock you down – you get up a bit further on the slope, but the clock keeps running.
+- At the finish you see your time and missed gates, then *AGAIN?* (**Num 8/2** choose, **Enter** / **Num 5** confirm).
+- Best time – **BEST SKI** in STATS.
 
 ### DREAM (PC only)
-`dream` – walk through dreams: islands in the void, empty cities, hills, forests of pillars. **Num 8/2** walk, **Num 4/6** turn. Find the glowing crystals – collect enough and you wake up in a new dream. Walk into the void and you fall… And sometimes you are not alone in the dream – keep your distance.
+`dream` – walk through strange dreams: islands in the void, empty cities, hills, forests of pillars. **Num 8/2** walk, **Num 4/6** turn. Find the glowing crystals – collect enough and you wake up in a new dream. Walk into the void and you fall… And sometimes you are not alone in the dream – keep your distance.
+
+### VOXEL – build with blocks (PC only)
+`voxel` – a time killer: walk around, jump, stack blocks, climb your towers and fall off them. No goal, just build.
+- **Num 8/2** walk, **Num 4/6** turn, **Num + / Num -** look up / down
+- **Enter** switches the mode (shown under the picture):
+  - walk – **Num 5** jump (one block high you climb by yourself, two need a jump)
+  - **BUILD** – **Num 5** puts a block where the frame is, **hold Num 5** – next color
+  - **REMOVE** – **Num 5** removes the top block in the red frame
+- Your world is **saved when you leave** and comes back next time. `voxel new` – start with an empty floor.
+- Blocks stack in columns – towers, walls and stairs yes, arches and floating blocks no.
+- Built something big? Fly through it with `fpv voxel`.
 
 ### CPTR, HELL, BugGO
 - `cptr` – fly a copter through a tunnel (**Num 8 / Num 2**), best flight in STATS
@@ -211,8 +232,19 @@ The tablet runs real **CHIP-8** games – a tiny game computer from the late 70s
 - Put `.ch8` files into `profile/KNS/chip8/` on your PC
 - `chip8 list` – your files, `chip8 <name>` – run one (e.g. `chip8 minefield`)
 - Keys: **Num 8/2/4/6**, **Num 5**, **Enter**, **Num + / Num -** (CHIP-8 keys 5/8/7/9, 6, 4, A, 0)
-- **MINEFIELD** – own free example game, with its source code, available on here on GitHub.
-- Use only **free / homebrew games** or ones you have the rights to.
+- **MINEFIELD** – our own free example game, with its source code, is available on the mod page.
+- Please use only **free / homebrew games** or ones you have the rights to.
+
+### Z-machine – text adventures (PC only)
+The tablet runs classic text adventures – the kind Infocom made famous, and hundreds of free games written in Inform since then (`.z3`, `.z5`, `.z8`).
+- Put the game files into `profile/KNS/zmachine/` on your PC
+- `zmachine list` – your games, `zmachine <name>` – run one
+- Type commands like in the terminal (`open mailbox`, `go north`, `take lamp`…), the status line (room, score) is at the top
+- The game is **saved when you leave** – next time it asks *Continue? (yes / no)*. The game's own `save` and `restore` use the same slot.
+- Please use only **free / homebrew games** or ones you have the rights to.
+
+### ELIZA
+`eliza` – the famous 1966 computer therapist by Joseph Weizenbaum, one of the first chatbots ever. Talk to her in English, she will answer like a psychotherapist. `bye` ends the session, **ESC** back.
 
 ### Quick ones
 `dice`, `dice 20`, `coin`
@@ -262,6 +294,7 @@ The heart of the tablet.
 - `video list`, `video <name>` – short videos (PC only)
 - `armahints`
 - `wiki <word>` – the start of a Wikipedia article (PC only, asks for permission the first time)
+- `bf <code>` – run Brainf*ck, the famous esoteric language (8 commands: `+ - < > [ ] . ,`). `bf <name>` runs a file from `profile/KNS/bf`, `bf convert <text>` writes the code that prints your text (saved as `converted.bf`, run it with `bf converted`). PC only.
 - `radio` – radio stations: `radio <n>`, `radio next`, `radio list`, `radio off`, `radio vol 0-100` (needs the Project Sonar mod on the server)
 
 **Other**
@@ -303,7 +336,7 @@ Reminder: Use the arrow keys to cycle through recent commands.
 
 - The tablet works only **in your hands** – put it away and it switches off (and remembers where you were).
 - KNS cameras, map following and health of other players work only for **your own faction**.
-- Some features are **PC only** (photos, files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, CHIP-8) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN and CPTR work everywhere – PC and console players can play BATTLE together.
+- Some features are **PC only** (photos, files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, SKI, VOXEL, CHIP-8, Z-machine, BF) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN, CPTR and ELIZA work everywhere – PC and console players can play BATTLE together.
 - Settings (brightness, volume, map options, phone, battle, theme, wallpaper…) and what you unlocked are saved on your PC in `profile/KNS/` – they stay after leaving the server or restarting the game.
 - Not sure about a command? Type it with `help`, e.g. `cctv help`. Or open the **Manual** on the kukaOS screen.
 
