@@ -1,0 +1,14 @@
+EDEN - Release 24
+
+Eight o'clock Departure, Everon, Nineteen eighty-nine.
+A text adventure set on Everon during the 1989 evacuation.
+About 1-2 hours. Three endings.
+Story by kuka.
+
+Play on the KNS tablet:
+- put eden.z5 in Documents/My Games/ArmaReforger/profile/KNS/zmachine
+- type "zmachine eden" in the terminal
+
+Also runs in any Z-machine interpreter (e.g. Frotz, Gargoyle, Parchment).
+
+Compiled with Inform 6.45, library 6.12.2.
