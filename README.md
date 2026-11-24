@@ -82,11 +82,11 @@ At the bottom there is a bar of quick actions (**F** on the icon):
 - **Phone** – the PHONE app (who you can call); during a call it becomes **Hang up**
 - **Camera**, **Selfie** – tablet cameras
 - **Taxi** – calls a taxi; if you are a driver on duty, it opens your taxi calls
-- **BugGO**, **CPTR** (copter game)
+- **BugGO**, **Games** (menu of the tablet games – see **Games**)
 - **Manual**
 
 ### Themes and wallpapers
-- `theme` – terminal colors, `wallpaper` – backgrounds of the kukaOS screen. Both list what you have; `theme green` / `wallpaper mucha` switches (saved).
+- `theme` – terminal colors, `wallpaper` – backgrounds of the kukaOS screen. Both list what you have; `theme green` / `wallpaper mucha` switches (saved). `default` and `gray` are always available.
 - Some are **locked**. Catch a very rare **StackOverflow** with BugGO and type `stackoverflow` – it unlocks a random theme or wallpaper you don't have yet.
 
 ---
@@ -168,13 +168,15 @@ Need a ride, or want to drive for your team? The tablet has a taxi service – f
 
 ## Games
 
-`games` (or `help games`) lists them all. `<name> help` gives a short summary in the terminal. **ESC** always takes you back.
+`games` (or the **Games** icon on the kukaOS screen) opens the **GAMES** menu: **Num 8 / Num 2** – select, **Enter** or **Num 5** – start, **ESC** – back. Games that work only on PC are not shown on consoles.
+
+`help games` lists them all in the terminal, `<name> help` gives a short summary. **ESC** always takes you back.
 
 ### BATTLE – battleships against other players
 Classic battleships, played over the server against another player – or against the tablet.
 - `battle <id>` – invite a player (IDs: `players` / `ids`), `battle quit` – cancel the invite
 - The invited player sees the invite in the terminal: `battle accept` or `battle decline`
-- `battle cpu` – play against the tablet
+- `battle cpu` – play against the tablet (BATTLE in the GAMES menu does the same)
 - **Num 5** – new random fleet, **Enter** – ready, then **Num 8/2/4/6** aim and **Enter** fire
 - **ESC** hides the game – it keeps going in the background, even if you die. `battle` brings it back; the terminal tells you when it's your turn.
 - `battle quit` – end the game (leaving the server ends it too)
@@ -193,7 +195,7 @@ Classic battleships, played over the server against another player – or agains
 
 ### FPV – drone racing (PC only)
 `fpv` – fly an FPV drone through the rings. The **yellow** ring is the one you need, the **orange-red** ones come next. Miss a ring and you have to turn back – the next ones don't count until you fly through it.
-- **Num 8** nose down (faster), **Num 2** nose up, **Num 4/6** turn, **Num + / Num -** up / down, **Enter** short boost
+- **Num 8** nose down (faster), **Num 2** nose up, **Num 4/6** turn, **Num 5** turn around, **Num + / Num -** up / down, **Enter** short boost
 - The battery drains all the time – every ring adds a few seconds.
 - Hit the ground or a rock and the drone explodes (the crater stays) – *NO SIGNAL*. Empty battery – *BATTERY EMPTY*.
 - Most rings in one flight – **BEST FPV** in STATS.
@@ -241,6 +243,7 @@ The tablet runs classic text adventures – the kind Infocom made famous, and hu
 - `zmachine list` – your games, `zmachine <name>` – run one
 - Type commands like in the terminal (`open mailbox`, `go north`, `take lamp`…), the status line (room, score) is at the top
 - The game is **saved when you leave** – next time it asks *Continue? (yes / no)*. The game's own `save` and `restore` use the same slot.
+- **EDEN** – our own free text adventure, set on Everon during the 1989 evacuation (about 1-2 hours, three endings). Get `eden.z5` from the `eden` folder in our GitHub repo and type `zmachine eden`.
 - Please use only **free / homebrew games** or ones you have the rights to.
 
 ### ELIZA
@@ -289,7 +292,7 @@ The heart of the tablet.
 - `cctv set [height] [direction]` – place your CCTV camera here (height 10-100 cm), `cctv` – connect (up to 300 m), `cctv off` – remove. One camera, gone when you die.
 
 **Fun**
-- Games – see the **Games** section (`games` lists them)
+- Games – see the **Games** section (`games` opens the menu)
 - `player list`, `player <name>`, `player next / prev / stop` – sounds that keep playing in the background; `volume 0-100`
 - `video list`, `video <name>` – short videos (PC only)
 - `armahints`
