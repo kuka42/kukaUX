@@ -186,7 +186,7 @@ Classic battleships, played over the server against another player – or agains
 
 ### Kuka Virtuality (KV) – the tablet's 3D engine (PC only)
 MOTO, FPV, SKI, DREAM, VOXEL and also the LIDAR share one engine: **Kuka Virtuality**, a 3D world drawn with ASCII characters.
-- `kv hd on` – sharper picture (more characters on the screen, needs more CPU), `kv hd off` – normal (saved).
+- `kv hd 1` / `2` / `3` – sharper picture (more characters on the screen, needs more CPU, 1 by default), `kv hd off` – normal (saved).
 - It works from the next start of a game; `kv` shows what you have set now.
 
 ### MOTO – motorcycle trial (PC only)
@@ -201,6 +201,7 @@ MOTO, FPV, SKI, DREAM, VOXEL and also the LIDAR share one engine: **Kuka Virtual
 - Most rings in one flight – **BEST FPV** in STATS.
 - `fpv voxel` – race over the world you built in **VOXEL** (each block becomes a building block 2 m wide and 3 m tall). No record here, and craters disappear when you leave – your world stays as it was.
 - `fpv voxel free` – free flight over your VOXEL world: no rings, no battery. Crash, wreck your buildings and go again – the destruction stays until you leave.
+- `fpv sandbox` – free flight over random land or a canyon: no rings, no battery, no record.
 
 ### SKI – slalom (PC only)
 `ski` – a slalom on time down a long slope, first-person, with your skis in front of you. Every run is a new slope.
@@ -311,12 +312,14 @@ The heart of the tablet.
 **Other**
 - `kukaux` – the kukaOS screen
 - `report <text>` – a message to the server admins, saved on the server with your name and position. One per session.
+- `admin` – lets the server admins know (a line in the server console). One per session.
 - `log` – notifications, players joining / leaving, killfeed and kukaUX messages with real time
 - `print <text>` – write your name, position, time and text to the STATUS log; `save` – export STATUS and terminal logs to a file
-- `kv hd on` / `off` – resolution of the 3D games (see **Kuka Virtuality**)
+- `kv hd 1` / `2` / `3` / `off` – resolution of the 3D games (see **Kuka Virtuality**)
 - `kpad` – new note, `kpad list` – saved notes, `kpad <n>` – open one (inside a note: Enter new line, `:q` or ESC exit)
 - `theme` – terminal colors, `wallpaper` – kukaOS backgrounds, `stackoverflow` – unlock a new one (see **Themes and wallpapers**)
 - `clear` – clear the terminal history, `run <program>` – same as typing the program
+- `reboot` – restarts the tablet.
 - `exit` / `off` – switch the tablet off
 
 ---
@@ -362,7 +365,7 @@ The first start of the server creates `profile/KNS/server.json` in the server's 
 ```json
 {
   "version": 1,
-  "features": { "phone": true, "taxi": true, "battle": true, "trap": true, "report": true },
+  "features": { "phone": true, "taxi": true, "battle": true, "trap": true, "report": true, "admin": true },
   "rewards": { "stunt": true, "stuntCooldown": 120,
                "stuntSmallMeters": 15, "stuntSmallXP": 10,
                "stuntMediumMeters": 30, "stuntMediumXP": 20,
@@ -372,8 +375,9 @@ The first start of the server creates `profile/KNS/server.json` in the server's 
 }
 ```
 
-- `features` – `false` switches a feature off on your server: `phone` (phone calls and shared channels), `taxi`, `battle` (BATTLE between players – `battle cpu` always works), `trap`, `report`. Players get *"Disabled on this server."*
-- `report` – players' messages (`report <text>`, one per session) are saved as files in `profile/KNS/reports/` (date and time in the file name; name, GUID, faction, position and text inside).
+- `features` – `false` switches a feature off on your server: `phone` (phone calls and shared channels), `taxi`, `battle` (BATTLE between players – `battle cpu` always works), `trap`, `report`, `admin`. Players get *"Disabled on this server."*
+- `report` – players' messages (`report <text>`, one per session) are saved as files in `profile/KNS/reports/` (date and time in the file name; name, GUID, faction, position and text inside). The server console shows *"[kukaUX] Server received message from NAME { GUID }."*
+- `admin` – a player's ping (`admin`, one per session) shows in the server console and log: *"[kukaUX] Server received ping from NAME { GUID }."*
 - `rewards` – rank points for STUNT jumps: `stunt` on / off, points for a jump from `stuntSmallMeters` / `stuntMediumMeters` / `stuntBigMeters`, and `stuntCooldown` – seconds between rewards for one player.
 - `rewards` – rank points for TAXI drivers: `taxi` on / off, `taxiXP` once per finished ride, if the driver drove the client in the same vehicle for at least `taxiMinMeters`, plus `taxiXPPerKm` for every further full kilometre, at most `taxiMaxXP` per ride.
 - Rank points work only in game modes with ranks.
