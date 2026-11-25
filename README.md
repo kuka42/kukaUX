@@ -4,19 +4,6 @@
 
 **KNS (Kuka Neighbouring System)** is a field tablet for Arma Reforger. Take it out of your inventory and you get a small computer in your hands, running its own system, **kukaUX**.
 
-With the tablet you can:
-
-- **watch your teammates' helmet cams** (KNS) – live view from their perspective,
-- open a **map** right on the tablet, follow yourself or a teammate,
-- **scan for drones** and look through their cameras (AIRCRACK),
-- check **players, stats, weather, events, vehicles and health**,
-- **call other players** by voice and join shared voice channels,
-- **call a taxi** or work as a driver for your team,
-- place your own **CCTV camera** and watch it from up to 300 m,
-- **take photos** with the tablet camera,
-- play games (yes it kinda runs it) – **BATTLE** against other players, **BLOX**, **HANGMAN**, **MOTO**, **FPV**, **SKI**, **DREAM**, build with blocks in **VOXEL**, talk to **ELIZA**, even a **CHIP-8 emulator** and a **Z-machine** for text adventures – hunt bugs with **BugGO**, listen to sounds, take notes,
-- and type commands in a **terminal**, just like on a real computer.
-
 Everything happens on your screen only – other players don't see what you do on your tablet.
 
 ---
@@ -64,10 +51,17 @@ The game map on your tablet.
 
 ### LIST, STATS, STATUS
 - **LIST** – players by faction: kills, deaths, score.
-- **STATS** – your stats for this session and in total: time, distance, kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV, SKI).
+- **STATS** – your stats for this session and in total: time, distance, your longest vehicle jump (STUNT), kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV, SKI).
 - **STATUS** – time, wind, weather, your deployment time (with the whole scenario time in brackets) and a log of events.
 
 TIP:  use **Num 8 / Num 2** to scroll.
+
+### STUNT – vehicle jumps
+Jump with a wheeled vehicle – as the driver, with the tablet in your inventory.
+- Every jump from 5 m shows up in the terminal, e.g. `[kukaUX] Stunt: 2.1 s, 17 m`.
+- Your longest jump (distance and time in the air) is in **STATS**, or type `stunt` – this session and overall.
+- Only landings on the wheels count – rolls and landing on the roof don't.
+- On servers with ranks, a long jump also gives rank points (**Stunt**), then a short break before the next ones.
 
 ### AIRCRACK
 Scans for drones nearby and connects to their cameras. **Ctrl + I / Ctrl + Y** switch between drones.
@@ -157,6 +151,7 @@ Need a ride, or want to drive for your team? The tablet has a taxi service – f
 - `taxi done` – finish the ride at the destination.
 - It also ends by itself when you and the passenger are **100 m apart for 30 s** (they got out and walked away).
 - Finished rides add the distance you drove to **TAXI** in **STATS**.
+- On servers with ranks, a finished ride of at least 3 km with the client in your vehicle gives you rank points (**Taxi**) – a bit more for every further kilometre.
 
 ### Good to know
 - Max **5 drivers on duty** per faction.
@@ -189,8 +184,13 @@ Classic battleships, played over the server against another player – or agains
 ### HANGMAN
 `hangman` – guess the word letter by letter. **Num 4/6** choose a letter, **Num 8/2** other row, **Enter** or **Num 5** guess. 7 mistakes and you hang.
 
+### Kuka Virtuality (KV) – the tablet's 3D engine (PC only)
+MOTO, FPV, SKI, DREAM, VOXEL and also the LIDAR share one engine: **Kuka Virtuality**, a 3D world drawn with ASCII characters.
+- `kv hd on` – sharper picture (more characters on the screen, needs more CPU), `kv hd off` – normal (saved).
+- It works from the next start of a game; `kv` shows what you have set now.
+
 ### MOTO – motorcycle trial (PC only)
-`moto` – ride a track high above a valley, first-person, to the finish gate. **Num 8** gas, **Num 2** brake / reverse, **Num 4/6** steer. Drops, kickers and gap jumps – take them with enough speed. Fall off the track and you lose a life (3 per run). Every finish gate is a new level. Best level in STATS.
+`moto` – ride a track high above a valley, first-person, to the finish gate. **Num 8** gas, **Num 2** brake / reverse, **Num 4/6** steer. Drops, kickers and gap jumps – take them with enough speed. Fall off the track and you lose a life (3 per run). Every finish gate is a new level. Best finished level in STATS.
 - `moto sandbox` – free ride on flat ground full of jumps, no lives, no record.
 
 ### FPV – drone racing (PC only)
@@ -199,7 +199,7 @@ Classic battleships, played over the server against another player – or agains
 - The battery drains all the time – every ring adds a few seconds.
 - Hit the ground or a rock and the drone explodes (the crater stays) – *NO SIGNAL*. Empty battery – *BATTERY EMPTY*.
 - Most rings in one flight – **BEST FPV** in STATS.
-- `fpv voxel` – race over the world you built in **VOXEL** (each block becomes a 4 m building block). No record here, and craters disappear when you leave – your world stays as it was.
+- `fpv voxel` – race over the world you built in **VOXEL** (each block becomes a building block 2 m wide and 3 m tall). No record here, and craters disappear when you leave – your world stays as it was.
 - `fpv voxel free` – free flight over your VOXEL world: no rings, no battery. Crash, wreck your buildings and go again – the destruction stays until you leave.
 
 ### SKI – slalom (PC only)
@@ -211,7 +211,7 @@ Classic battleships, played over the server against another player – or agains
 - Best time – **BEST SKI** in STATS.
 
 ### DREAM (PC only)
-`dream` – walk through strange dreams: islands in the void, empty cities, hills, forests of pillars. **Num 8/2** walk, **Num 4/6** turn. Find the glowing crystals – collect enough and you wake up in a new dream. Walk into the void and you fall… And sometimes you are not alone in the dream – keep your distance.
+`dream` – walk through dreams: islands in the void, empty cities, hills, forests of pillars. **Num 8/2** walk, **Num 4/6** turn. Sometimes you are not alone in the dream – keep your distance.
 
 ### VOXEL – build with blocks (PC only)
 `voxel` – a time killer: walk around, jump, stack blocks, climb your towers and fall off them. No goal, just build.
@@ -224,18 +224,23 @@ Classic battleships, played over the server against another player – or agains
 - Blocks stack in columns – towers, walls and stairs yes, arches and floating blocks no.
 - Built something big? Fly through it with `fpv voxel`.
 
-### CPTR, HELL, BugGO
+### CPTR, HELL
 - `cptr` – fly a copter through a tunnel (**Num 8 / Num 2**), best flight in STATS
-- `hell` – ASCII HELL shooter (PC only), best time in STATS
-- `buggo` – a bug hides nearby; find it with **BugGO** (kukaOS) or `buggo cam` and catch it with **Enter**. Caught bugs count in STATS – some are very rare…
+- `hell` – ASCII HELL shooter, port from JS game (PC only), best time in STATS
+
+### BugGO – bug hunting
+- `buggo` – a bug hides somewhere near you.
+- Find it with the tablet camera – **BugGO** on the kukaOS screen or `buggo cam` – and catch it with **Enter**.
+- `buggo clear` – removes the waiting bug.
+- Caught bugs count in **STATS**. Some are rare… **StackOverflow** unlocks a new feature with `stackoverflow` (see **Themes and wallpapers**).
 
 ### CHIP-8 emulator (PC only)
 The tablet runs real **CHIP-8** games – a tiny game computer from the late 70s, still loved by homebrew makers today.
 - Put `.ch8` files into `profile/KNS/chip8/` on your PC
 - `chip8 list` – your files, `chip8 <name>` – run one (e.g. `chip8 minefield`)
 - Keys: **Num 8/2/4/6**, **Num 5**, **Enter**, **Num + / Num -** (CHIP-8 keys 5/8/7/9, 6, 4, A, 0)
-- **MINEFIELD** – our own free example game, with its source code, is available on the mod page.
-- Please use only **free / homebrew games** or ones you have the rights to.
+- **MINEFIELD** – a free example game, with its source code, is available on the GitHub page.
+- Use only **free / homebrew games** or ones you have the rights to.
 
 ### Z-machine – text adventures (PC only)
 The tablet runs classic text adventures – the kind Infocom made famous, and hundreds of free games written in Inform since then (`.z3`, `.z5`, `.z8`).
@@ -243,8 +248,8 @@ The tablet runs classic text adventures – the kind Infocom made famous, and hu
 - `zmachine list` – your games, `zmachine <name>` – run one
 - Type commands like in the terminal (`open mailbox`, `go north`, `take lamp`…), the status line (room, score) is at the top
 - The game is **saved when you leave** – next time it asks *Continue? (yes / no)*. The game's own `save` and `restore` use the same slot.
-- **EDEN** – our own free text adventure, set on Everon during the 1989 evacuation (about 1-2 hours, three endings). Get `eden.z5` from the `eden` folder in our GitHub repo and type `zmachine eden`.
-- Please use only **free / homebrew games** or ones you have the rights to.
+- **EDEN** – a free text adventure, set on Everon during the 1989 evacuation (about 1-2 hours, three endings). Get `eden.z5` from the `eden` folder in our GitHub repo and type `zmachine eden`.
+- Use only **free / homebrew games** or ones you have the rights to.
 
 ### ELIZA
 `eliza` – the famous 1966 computer therapist by Joseph Weizenbaum, one of the first chatbots ever. Talk to her in English, she will answer like a psychotherapist. `bye` ends the session, **ESC** back.
@@ -276,6 +281,8 @@ The heart of the tablet.
 - `where <id>` – distance and direction to a teammate
 - `gps` / `me` – your grid position, `az <x> <y>` / `azimuth <x> <y>` – distance and direction to a grid (e.g. `az 0482 1135`)
 - `compass` / `c` – the direction you are facing
+- `stunt` – your longest vehicle jump (see **STUNT**) 
+- `trap` – set the vehicle trap
 - `obd` – your vehicle: engine, rpm, gear, speed, fuel, damage
 - `scanner` / `scan` – deployed radios nearby (rough distance and direction)
 - `material` / `mat` – what the surface you look at is made of (ballistics, up to 5 m)
@@ -283,7 +290,8 @@ The heart of the tablet.
 
 **Server and connection**
 - `net` – server name, server FPS, your FPS, ping, packet loss
-- `fps`, `ping`, `ip`, `server` / `host`, `id` (your name and player ID), `mods` (server mod list)
+- `fps`, `ping`, `ip`, `server` / `host`, `mods` (server mod list)
+- `ids`, `players` - player names and IDs, (`id` - your name and player ID)
 
 **Camera and CCTV**
 - `camera` – back camera; **hold Num 5** to take a photo
@@ -292,21 +300,23 @@ The heart of the tablet.
 - `cctv set [height] [direction]` – place your CCTV camera here (height 10-100 cm), `cctv` – connect (up to 300 m), `cctv off` – remove. One camera, gone when you die.
 
 **Fun**
-- Games – see the **Games** section (`games` opens the menu)
-- `player list`, `player <name>`, `player next / prev / stop` – sounds that keep playing in the background; `volume 0-100`
+- `games` – see the **Games** section (`games` opens the menu)
+- `radio` – radio stations: `radio <n>`, `radio next`, `radio list`, `radio off`, `radio vol 0-100` (needs the Project Sonar mod on the server)
 - `video list`, `video <name>` – short videos (PC only)
-- `armahints`
+- `player list`, `player <name>`, `player next / prev / stop` – sounds that keep playing in the background; `volume 0-100`
 - `wiki <word>` – the start of a Wikipedia article (PC only, asks for permission the first time)
 - `bf <code>` – run Brainf*ck, the famous esoteric language (8 commands: `+ - < > [ ] . ,`). `bf <name>` runs a file from `profile/KNS/bf`, `bf convert <text>` writes the code that prints your text (saved as `converted.bf`, run it with `bf converted`). PC only.
-- `radio` – radio stations: `radio <n>`, `radio next`, `radio list`, `radio off`, `radio vol 0-100` (needs the Project Sonar mod on the server)
+- `armahints`
 
 **Other**
+- `kukaux` – the kukaOS screen
+- `report <text>` – a message to the server admins, saved on the server with your name and position. One per session.
 - `log` – notifications, players joining / leaving, killfeed and kukaUX messages with real time
 - `print <text>` – write your name, position, time and text to the STATUS log; `save` – export STATUS and terminal logs to a file
+- `kv hd on` / `off` – resolution of the 3D games (see **Kuka Virtuality**)
 - `kpad` – new note, `kpad list` – saved notes, `kpad <n>` – open one (inside a note: Enter new line, `:q` or ESC exit)
 - `theme` – terminal colors, `wallpaper` – kukaOS backgrounds, `stackoverflow` – unlock a new one (see **Themes and wallpapers**)
 - `clear` – clear the terminal history, `run <program>` – same as typing the program
-- `kukaux` – the kukaOS screen
 - `exit` / `off` – switch the tablet off
 
 ---
@@ -339,8 +349,34 @@ Reminder: Use the arrow keys to cycle through recent commands.
 
 - The tablet works only **in your hands** – put it away and it switches off (and remembers where you were).
 - KNS cameras, map following and health of other players work only for **your own faction**.
-- Some features are **PC only** (photos, files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, SKI, VOXEL, CHIP-8, Z-machine, BF) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN, CPTR and ELIZA work everywhere – PC and console players can play BATTLE together.
+- Some features are **PC only** (files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, SKI, VOXEL, CHIP-8, Z-machine, BF) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN, CPTR and ELIZA work everywhere – PC and console players can play BATTLE together.
 - Settings (brightness, volume, map options, phone, battle, theme, wallpaper…) and what you unlocked are saved on your PC in `profile/KNS/` – they stay after leaving the server or restarting the game.
 - Not sure about a command? Type it with `help`, e.g. `cctv help`. Or open the **Manual** on the kukaOS screen.
+
+---
+
+## For server admins
+
+The first start of the server creates `profile/KNS/server.json` in the server's profile folder. Change it and restart the server:
+
+```json
+{
+  "version": 1,
+  "features": { "phone": true, "taxi": true, "battle": true, "trap": true, "report": true },
+  "rewards": { "stunt": true, "stuntCooldown": 120,
+               "stuntSmallMeters": 15, "stuntSmallXP": 10,
+               "stuntMediumMeters": 30, "stuntMediumXP": 20,
+               "stuntBigMeters": 50, "stuntBigXP": 30,
+               "taxi": true, "taxiMinMeters": 3000, "taxiXP": 25,
+               "taxiXPPerKm": 5, "taxiMaxXP": 50 }
+}
+```
+
+- `features` – `false` switches a feature off on your server: `phone` (phone calls and shared channels), `taxi`, `battle` (BATTLE between players – `battle cpu` always works), `trap`, `report`. Players get *"Disabled on this server."*
+- `report` – players' messages (`report <text>`, one per session) are saved as files in `profile/KNS/reports/` (date and time in the file name; name, GUID, faction, position and text inside).
+- `rewards` – rank points for STUNT jumps: `stunt` on / off, points for a jump from `stuntSmallMeters` / `stuntMediumMeters` / `stuntBigMeters`, and `stuntCooldown` – seconds between rewards for one player.
+- `rewards` – rank points for TAXI drivers: `taxi` on / off, `taxiXP` once per finished ride, if the driver drove the client in the same vehicle for at least `taxiMinMeters`, plus `taxiXPPerKm` for every further full kilometre, at most `taxiMaxXP` per ride.
+- Rank points work only in game modes with ranks.
+- Everything is on by default. Missing entries are added automatically with default values.
 
 Have fun! – *kukaUX, made by kuka*
