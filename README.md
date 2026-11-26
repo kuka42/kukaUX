@@ -51,7 +51,7 @@ The game map on your tablet.
 
 ### LIST, STATS, STATUS
 - **LIST** – players by faction: kills, deaths, score.
-- **STATS** – your stats for this session and in total: time, distance, your longest vehicle jump (STUNT), kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV, SKI).
+- **STATS** – your stats for this session and in total: time, distance, your longest vehicle jump (STUNT), kills, deaths, taxi distance, caught bugs, BATTLE wins and your best game scores (CPTR flight, HELL, BLOX, MOTO, FPV, SKI, SKIJUMP).
 - **STATUS** – time, wind, weather, your deployment time (with the whole scenario time in brackets) and a log of events.
 
 TIP:  use **Num 8 / Num 2** to scroll.
@@ -77,10 +77,10 @@ At the bottom there is a bar of quick actions (**F** on the icon):
 - **Camera**, **Selfie** – tablet cameras
 - **Taxi** – calls a taxi; if you are a driver on duty, it opens your taxi calls
 - **BugGO**, **Games** (menu of the tablet games – see **Games**)
-- **Manual**
+- **Manual** – choose **SEA** (the tablet assistant) or **MANUAL** (the tablet manual)
 
 ### Themes and wallpapers
-- `theme` – terminal colors, `wallpaper` – backgrounds of the kukaOS screen. Both list what you have; `theme green` / `wallpaper mucha` switches (saved). `default` and `gray` are always available.
+- `theme` – terminal colors, `wallpaper` – backgrounds of the kukaOS screen. Both list what you have; `theme green` / `wallpaper mucha` switches (saved). `default` and `gray` are always available, and `wallpaper black` too.
 - Some are **locked**. Catch a very rare **StackOverflow** with BugGO and type `stackoverflow` – it unlocks a random theme or wallpaper you don't have yet.
 
 ---
@@ -164,6 +164,7 @@ Need a ride, or want to drive for your team? The tablet has a taxi service – f
 ## Games
 
 `games` (or the **Games** icon on the kukaOS screen) opens the **GAMES** menu: **Num 8 / Num 2** – select, **Enter** or **Num 5** – start, **ESC** – back. Games that work only on PC are not shown on consoles.
+The last item, **EXTRA**, lists more to play that you type in the terminal (dice, coin, joke, BATTLE with players, sandboxes, your own games) – **Enter**, **Num 5** or **ESC** takes you back to the list.
 
 `help games` lists them all in the terminal, `<name> help` gives a short summary. **ESC** always takes you back.
 
@@ -185,7 +186,7 @@ Classic battleships, played over the server against another player – or agains
 `hangman` – guess the word letter by letter. **Num 4/6** choose a letter, **Num 8/2** other row, **Enter** or **Num 5** guess. 7 mistakes and you hang.
 
 ### Kuka Virtuality (KV) – the tablet's 3D engine (PC only)
-MOTO, FPV, SKI, DREAM, VOXEL and also the LIDAR share one engine: **Kuka Virtuality**, a 3D world drawn with ASCII characters.
+MOTO, FPV, SKI, SKIJUMP, DREAM, VOXEL and also the LIDAR share one engine: **Kuka Virtuality**, a 3D world drawn with ASCII characters.
 - `kv hd 1` / `2` / `3` – sharper picture (more characters on the screen, needs more CPU, 1 by default), `kv hd off` – normal (saved).
 - It works from the next start of a game; `kv` shows what you have set now.
 
@@ -210,6 +211,16 @@ MOTO, FPV, SKI, DREAM, VOXEL and also the LIDAR share one engine: **Kuka Virtual
 - Trees knock you down – you get up a bit further on the slope, but the clock keeps running.
 - At the finish you see your time and missed gates, then *AGAIN?* (**Num 8/2** choose, **Enter** / **Num 5** confirm).
 - Best time – **BEST SKI** in STATS.
+
+### SKIJUMP – ski jumping (PC only)
+`skijump` – ski jumping cup, camera behind the jumper. The K-point is 95 m, the hill ends at about 110 m. Uses KV engine.
+- On the bar: **Enter** starts. The wind changes all the time (bottom right: green = headwind, helps; red = tailwind) – wait for a good one.
+- Inrun: hold **Num 5** – deeper tuck, more speed.
+- Take-off: **Enter** at the very edge of the table – *JUMP %* shows how well you timed it.
+- In the air: **Num 8** lean forward, **Num 2** back – keep the *LEAN* bar green. It slowly drops on its own; full bar at landing = fall.
+- Landing: **Num 5** just before you touch the snow – *TELEMARK!*. Too early = landing on two feet, much too early = fall. Landing past the end of the hill = fall too.
+- A replay follows every jump without a fall – **Enter** / **Num 5** skips it. Then the result and *AGAIN?*.
+- **BEST SKIJUMP** in STATS counts only jumps with a telemark. 100 m+ with a telemark wins a cup – your cups are counted in STATS too.
 
 ### DREAM (PC only)
 `dream` – walk through dreams: islands in the void, empty cities, hills, forests of pillars. **Num 8/2** walk, **Num 4/6** turn. Sometimes you are not alone in the dream – keep your distance.
@@ -254,9 +265,10 @@ The tablet runs classic text adventures – the kind Infocom made famous, and hu
 
 ### ELIZA
 `eliza` – the famous 1966 computer therapist by Joseph Weizenbaum, one of the first chatbots ever. Talk to her in English, she will answer like a psychotherapist. `bye` ends the session, **ESC** back.
+`parry` – PARRY (1972), ELIZA's paranoid patient. `eliza parry` – watch the two of them chat.
 
 ### Quick ones
-`dice`, `dice 20`, `coin`
+`dice`, `dice 20`, `coin`, `joke` / `lol`
 
 ---
 
@@ -267,9 +279,18 @@ The heart of the tablet.
 - **Enter** – start typing, **Enter** – run the command, **ESC** – stop typing
 - **ESC** in the terminal (when not typing) – switches the tablet off
 - **Arrow keys** – last commands, **Tab** – complete a command
-- `help` – commands by topic: `help programs`, `help games`, `help players`, `help tools`, `help system`; `help all` – every command
+- `help` – commands by topic: `help programs`, `help games`, `help players`, `help tools`, `help system`, `help misc`; `help all` – every command
 - `<command> help` – what it does (e.g. `map help`)
 - **Num 8 / Num 2** – scroll the history
+- Commands with a player ID also take a nick: `call kuka`, `map kuka`, `health kuka`
+
+### SEA – tablet assistant
+`sea` (or the **i** icon on kukaOS → SEA) – ask SEA in English:
+- how something works – "how do I call someone?", "what is taxi?" (she quotes the help and the manual)
+- live info – "my ping?", "where am I?", "is ACE Medical on the server?", "what's the wind?", "my kills?"
+- or just chat
+
+She runs info commands herself and asks before opening a program or running a command ("Open map?" – **yes** / **no** with **Num 8 / Num 2**, **Enter** to confirm, **ESC** = no). Things that do something (call, report, taxi…) you type yourself. **bye** ends, **ESC** back.
 
 ### Useful commands
 
@@ -308,6 +329,7 @@ The heart of the tablet.
 - `wiki <word>` – the start of a Wikipedia article (PC only, asks for permission the first time)
 - `bf <code>` – run Brainf*ck, the famous esoteric language (8 commands: `+ - < > [ ] . ,`). `bf <name>` runs a file from `profile/KNS/bf`, `bf convert <text>` writes the code that prints your text (saved as `converted.bf`, run it with `bf converted`). PC only.
 - `armahints`
+- `joke` / `lol` – a random joke
 
 **Other**
 - `kukaux` – the kukaOS screen
@@ -317,6 +339,7 @@ The heart of the tablet.
 - `print <text>` – write your name, position, time and text to the STATUS log; `save` – export STATUS and terminal logs to a file
 - `kv hd 1` / `2` / `3` / `off` – resolution of the 3D games (see **Kuka Virtuality**)
 - `kpad` – new note, `kpad list` – saved notes, `kpad <n>` – open one (inside a note: Enter new line, `:q` or ESC exit)
+- `ls` – what is in your `profile/KNS` folder (PC only)
 - `theme` – terminal colors, `wallpaper` – kukaOS backgrounds, `stackoverflow` – unlock a new one (see **Themes and wallpapers**)
 - `clear` – clear the terminal history, `run <program>` – same as typing the program
 - `reboot` – restarts the tablet.
@@ -352,7 +375,8 @@ Reminder: Use the arrow keys to cycle through recent commands.
 
 - The tablet works only **in your hands** – put it away and it switches off (and remembers where you were).
 - KNS cameras, map following and health of other players work only for **your own faction**.
-- Some features are **PC only** (files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, SKI, VOXEL, CHIP-8, Z-machine, BF) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN, CPTR and ELIZA work everywhere – PC and console players can play BATTLE together.
+- On servers with ranks, every 10 km on foot with the tablet gives rank points (**Globetrotter**). The distance is the FOOT counter in STATS for this session.
+- Some features are **PC only** (files, videos, Wikipedia, HELL, LIDAR, DREAM, MOTO, FPV, SKI, SKIJUMP, VOXEL, CHIP-8, Z-machine, BF) – on consoles you'll see *"This is PC-exclusive feature."* BATTLE, BLOX, HANGMAN, CPTR and ELIZA work everywhere – PC and console players can play BATTLE together.
 - Settings (brightness, volume, map options, phone, battle, theme, wallpaper…) and what you unlocked are saved on your PC in `profile/KNS/` – they stay after leaving the server or restarting the game.
 - Not sure about a command? Type it with `help`, e.g. `cctv help`. Or open the **Manual** on the kukaOS screen.
 
@@ -365,21 +389,26 @@ The first start of the server creates `profile/KNS/server.json` in the server's 
 ```json
 {
   "version": 1,
+  "message": "Thanks for using KNS tablet, have fun! github.com/kuka42/kukaUX",
   "features": { "phone": true, "taxi": true, "battle": true, "trap": true, "report": true, "admin": true },
   "rewards": { "stunt": true, "stuntCooldown": 120,
                "stuntSmallMeters": 15, "stuntSmallXP": 10,
                "stuntMediumMeters": 30, "stuntMediumXP": 20,
                "stuntBigMeters": 50, "stuntBigXP": 30,
                "taxi": true, "taxiMinMeters": 3000, "taxiXP": 25,
-               "taxiXPPerKm": 5, "taxiMaxXP": 50 }
+               "taxiXPPerKm": 5, "taxiMaxXP": 50,
+               "globetrotter": true, "globetrotterKm": 10, "globetrotterXP": 50,
+               "globetrotterMinMinutes": 25 }
 }
 ```
 
+- `message` – a message for the players (`""` = none; by default a short thanks with the GitHub link). Each player gets it once per session in the terminal: *"[kukaUX] received server message: ..."*. One line, up to 300 characters.
 - `features` – `false` switches a feature off on your server: `phone` (phone calls and shared channels), `taxi`, `battle` (BATTLE between players – `battle cpu` always works), `trap`, `report`, `admin`. Players get *"Disabled on this server."*
 - `report` – players' messages (`report <text>`, one per session) are saved as files in `profile/KNS/reports/` (date and time in the file name; name, GUID, faction, position and text inside). The server console shows *"[kukaUX] Server received message from NAME { GUID }."*
 - `admin` – a player's ping (`admin`, one per session) shows in the server console and log: *"[kukaUX] Server received ping from NAME { GUID }."*
 - `rewards` – rank points for STUNT jumps: `stunt` on / off, points for a jump from `stuntSmallMeters` / `stuntMediumMeters` / `stuntBigMeters`, and `stuntCooldown` – seconds between rewards for one player.
 - `rewards` – rank points for TAXI drivers: `taxi` on / off, `taxiXP` once per finished ride, if the driver drove the client in the same vehicle for at least `taxiMinMeters`, plus `taxiXPPerKm` for every further full kilometre, at most `taxiMaxXP` per ride.
+- `rewards` – rank points for walking (**Globetrotter**): `globetrotter` on / off, `globetrotterXP` for every `globetrotterKm` on foot with the tablet in one session, at least `globetrotterMinMinutes` between two rewards (and after joining).
 - Rank points work only in game modes with ranks.
 - Everything is on by default. Missing entries are added automatically with default values.
 
